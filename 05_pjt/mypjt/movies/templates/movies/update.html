@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class=container>
+    <br>
+    <h1>영화 수정</h1>
+    <hr>
+
+    <form action="{% url 'movies:update' movie.pk %}" method='POST' enctype='multipart/form-data'>
+        {% csrf_token %}
+        {{form.as_p}}
+        {% if movie.actor_image %}
+          <img src="{{movie.actor_image.url}}">
+        {% endif %}
+    </form>
+    <form action="{% url 'movies:delete' movie.pk %}">
+      {% csrf_token %}
+      <input type="submit" value="수정" class='btn btn-info'>
+      <input type="submit" value="삭제하기" class='btn btn-danger' />
+      <a href="{% url 'movies:index' %}" class='btn btn-primary'>목록보기</a>
+      <a href="{% url 'movies:update' movie.pk %}" class='btn btn-warning'>초기화</a>
+    </form>
+  </div>
+
+{% endblock content %} 

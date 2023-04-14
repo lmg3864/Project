@@ -1,0 +1,48 @@
+{% extends 'base.html' %} 
+
+{% block content %}
+<div class='container'>
+  <hr>
+  {% if user.username %}
+  <h3>반갑습니다, {{user}}님</h3>
+  <form action="{% url 'accounts:logout' %}" method="POST">
+    {% csrf_token %}
+    <input type="submit" value="Logout">
+  </form>
+  <form action="{% url 'accounts:update' %}" method='GET'>
+    <input type="submit" value='회원정보 수정'>
+  </form>
+  <form action="{% url 'accounts:delete' %}" method="POST">
+    {% csrf_token %}
+    <input type="submit" value="회원탈퇴">
+  </form>
+  <hr>
+  <h1 font-weigth-bolder>PLAY LIST</h1>
+  <form action="{% url 'movies:create' %}" method="GET">
+    <input type="submit" value="영화 추가하기">
+  </form>
+  <div class='container justify-content-center'>
+    {% for movie in movies %}
+    <div class="card col-6" style="width: 24rem;">
+        {% if movie.actor_image %}
+          <img src="{{movie.actor_image.url}}" width=100%>
+        {% endif %}
+      <div class="card-body">
+        <a class='fs-2' href="{% url 'movies:detail' movie.pk %}">{{movie.title}}</a><br>
+        <h4> 평점 : {{movie.score}}</h4><br>
+        <h4 class="card-text">{{movie.description}}</h4>
+      </div>
+    </div>
+    {% endfor %} 
+  </div>
+  {% else %}
+  <h1>로그인 후 이용해 주세요!</h1>
+  <form action="{% url 'accounts:signup' %}" method="GET">
+    <input type="submit" value="회원가입">
+  </form>
+  <form action="{% url 'accounts:login' %}" method="GET">
+    <input type="submit" value="로그인">
+  </form>
+  {% endif %}
+</div>
+{% endblock content %}

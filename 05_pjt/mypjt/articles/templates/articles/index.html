@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class='container'>
+  <h1 class='text-center'>자유게시판</h1>
+
+  <hr>
+  
+  
+  {% for article in articles %}
+    <p>num :{{article.id}}</p>
+    <p>cate : {{article.cate}}</p>
+    <p>title : <a href="{% url 'articles:detail' article.pk %}">{{article.title}}</a></p>
+    <p>conteng : {{article.content}}</p>
+    <hr>
+  {% endfor %}
+  
+  
+  <form action="{% url 'articles:create' %}" method='GET'>
+    <input type="submit" value='글쓰기'>
+  </form>
+</div>
+{% endblock content %}
