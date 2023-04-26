@@ -57,7 +57,7 @@ def review_detail(request, review_pk):
             "delete" : f"review {review.id} is deleted"
         }
         review.delete()
-        return Response(result, status=status.HTTP_204_NO_CONTENT)
+        return Response(result, status=status.HTTP_204_NO_CONTENT)``
 
 @api_view(['POST'])
 def create_review(request, movie_pk):
@@ -67,4 +67,3 @@ def create_review(request, movie_pk):
         if serializer.is_valid(raise_exception=True):
             serializer.save(movie=mmovie)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
