@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>추천 영화</h1>
+<hr>
+<div class="row row-cols-1 row-cols-md-3 g-4">
+  {% for movie in movies %}
+    {% if movie.vote_average >= 8.6 %}
+      <div class="col">
+        <div class="card" style="width: 18rem;">
+          <img src="{{movie.poster_path}}" class="card-img-top" alt="...">
+            <div class="card-body">
+              <p class="card-text"><a href="{% url 'movies:detail' movie.pk %}" class="btn btn-secondary">{{movie.title}}</a> </p>
+            </div>
+        </div>
+      </div>
+    {% endif %}
+  {% endfor %}
+</div>
+
+{% endblock %}

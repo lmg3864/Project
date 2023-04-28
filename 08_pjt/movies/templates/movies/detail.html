@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="card" style="width: 40rem;">
+  <img src="{{movie.poster_path}}" class="card-img-top" alt="...">
+    <div class="card-body">
+      <p class="card-text">글 제목 : {{movie.title}}</p>
+      <p class="card-text">개봉 일 : {{movie.release_date}}</p>
+      <p class="card-text">관객 수 : {{movie.popularity}}</p>
+      <p class="card-text">투표 수 : {{movie.vote_count}}</p>
+      <p class="card-text">평점 : {{movie.vote_average}}</p>
+      <p class="card-text">개요 : {{movie.overview}}</p>
+    </div>
+  </div>
+{% endblock %}
